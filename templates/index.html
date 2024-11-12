@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Pico y Placa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-car-side me-2"></i>
+                Pico y Placa Digital
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#info"><i class="fas fa-info-circle me-1"></i> Información</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container main-container" style="margin-top: 5rem;">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 text-center">
+                <h1 class="mb-4 fw-bold">Sistema de Detección de Pico y Placa</h1>
+                <p class="lead mb-5">Detección automática de placas vehiculares en tiempo real</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="video-container">
+                    <img src="{{ url_for('video_feed') }}" class="video-feed" alt="Video feed">
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-12 col-lg-8">
+                <div class="status-card">
+                    <div class="status-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3 class="status-title">Estado de Detección</h3>
+                    <div id="mensaje-estado" class="alert alert-info">
+                        Esperando detección de placa...
+                    </div>
+                    <div id="placa-detectada" style="display: none;">
+                        <img id="placa-img" src="{{ url_for('static', filename='placa_detectada.jpg') }}" alt="Placa Detectada">
+                        <p id="ocr-texto"></p>
+                        <p id="verificacion-texto"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="row justify-content-center" id="info">
+            <div class="col-12 text-center mb-4">
+                <h2 class="fw-bold">Características del Sistema</h2>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4>Tiempo Real</h4>
+                    <p>Detección instantánea de placas vehiculares</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card text-center">
+                    <i class="fas fa-calendar-alt feature-icon"></i>
+                    <h4>Horarios</h4>
+                    <p>Verificación automática según el día de la semana</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card text-center">
+                    <i class="fas fa-check-circle feature-icon"></i>
+                    <h4>Precisión</h4>
+                    <p>Alta precisión en la lectura de placas</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-car-side me-2"></i> Pico y Placa Digital</h5>
+                    <p>Sistema inteligente de detección de restricciones vehiculares</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>© 2024 Todos los derechos reservados</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
