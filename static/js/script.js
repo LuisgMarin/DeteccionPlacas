@@ -17,4 +17,4 @@ function actualizarPlacaDetectada() {
         });
 }
 
-setInterval(actualizarPlacaDetectada, 500);
+setInterval(actualizarPlacaDetectada, 5000);
