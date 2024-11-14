@@ -9,7 +9,7 @@ from flask import Flask, render_template, Response, jsonify
 app = Flask(__name__)
 
 # Inicializar EasyOCR
-reader = easyocr.Reader(['en'])
+reader = easyocr.Reader(['es'])
 
 def verificar_pico_y_placa(placa_texto):
     # Filtrar solo los dígitos del texto de la placa
@@ -52,6 +52,7 @@ def placa_info():
         data = json.load(f)
     return jsonify(data)
 
+
 def gen_frames():
     cap = cv2.VideoCapture(0)
     while True:
@@ -88,8 +89,16 @@ def gen_frames():
                         placa_texto = result[0][1]
                         pico_y_placa_info = verificar_pico_y_placa(placa_texto)
                         
+                        # Guardar la información en un archivo JSON
+                        with open('static/placa_info.json', 'w') as f:
+                            json.dump({
+                                'placa_texto': placa_texto,
+                                'verificacion': pico_y_placa_info['message']
+                            }, f)
+                        
                         # Agregar delay de 2 segundos
                         time.sleep(4)
+                        
                         
                         # Imprimir con la información adicional
                         print("Placa detectada:", placa_texto, "-", pico_y_placa_info['message'])

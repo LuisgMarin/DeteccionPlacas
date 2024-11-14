@@ -7,20 +7,37 @@ Created on Mon Nov 11 19:51:28 2024
 
 import cv2
 import easyocr
+from datetime import datetime
+import time
+
 
 # Función para verificar si el último dígito de la placa es par o impar
-def clasificar_placa(placa_texto):
+def verificar_pico_y_placa(placa_texto):
     # Filtrar solo los dígitos del texto de la placa
     digitos = ''.join(filter(str.isdigit, placa_texto))
-    if digitos:
-        ultimo_digito = int(digitos[-1])
-        if ultimo_digito % 2 == 0:
-            print(f"La placa '{placa_texto}' es par.")
-        else:
-            print(f"La placa '{placa_texto}' es impar.")
-    else:
-        print("No se encontraron dígitos en la placa para clasificar.")
+    if not digitos:
+        return {
+            'message': f"No se encuentra una placa válida para '{placa_texto}'.",
+            'status': 'warning'
+        }
 
+    ultimo_digito = int(digitos[-1])
+    dia_semana = datetime.today().weekday()
+    # Lógica de pico y placa según el día de la semana y el último dígito de la placa
+    if (dia_semana == 0 and ultimo_digito in [1, 2]) or \
+       (dia_semana == 1 and ultimo_digito in [3, 4]) or \
+       (dia_semana == 2 and ultimo_digito in [5, 6]) or \
+       (dia_semana == 3 and ultimo_digito in [7, 8]) or \
+       (dia_semana == 4 and ultimo_digito in [9, 0]):
+        return {
+            'message': f"La placa '{placa_texto}' tiene pico y placa hoy.",
+            'status': 'warning'
+        }
+    else:
+        return {
+            'message': f"La placa '{placa_texto}' no tiene pico y placa hoy.",
+            'status': 'success'
+        }
 # Inicializar EasyOCR
 reader = easyocr.Reader(['en'])  # Configura el idioma según tu necesidad
 
@@ -60,10 +77,8 @@ while True:
 
             if result:
                 placa_texto = result[0][1]
-                print("Placa detectada:", placa_texto)
-                clasificar_placa(placa_texto)
-
-            # Dibujar el contorno de la placa en la imagen
+                resultado = verificar_pico_y_placa(placa_texto)
+            print(f"Placa detectada: {placa_texto} - {resultado}")            # Dibujar el contorno de la placa en la imagen
             cv2.drawContours(frame, [plate_region], -1, (0, 255, 0), 3)
             break
 

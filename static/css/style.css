@@ -71,6 +71,19 @@ body {
     color: var(--primary-color);
 }
 
+.badge {
+    font-size: 1.1em;
+    padding: 8px 15px;
+}
+
+#deteccion-info {
+    transition: all 0.3s ease;
+}
+
+.alert {
+    margin-bottom: 0;
+}
+
 .footer {
     background: rgba(26, 26, 26, 0.95);
     color: white;
