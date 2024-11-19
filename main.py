@@ -105,7 +105,7 @@ class PlacaDetector:
 
 def validar_formato_placa(placa_texto):
     """
-    Valida si el texto corresponde a un formato válido de placa colombiana con espacio en el medio.
+    Valida si el texto corresponde a un formato válido de placa colombiana.
     Retorna un diccionario con el resultado de la validación y el tipo de vehículo.
     """
     # Limpiamos la placa de espacios al inicio y al final, y la convertimos a mayúsculas
@@ -184,6 +184,9 @@ def verificar_pico_y_placa(placa_texto, confidence):
         }
 
 def gen_frames():
+    """
+    Genera frames de video desde la cámara y detecta placas en tiempo real.
+    """
     cap = cv2.VideoCapture(0)
     detector = PlacaDetector()
     
@@ -215,16 +218,27 @@ def gen_frames():
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 # Rutas Flask
+
+
 @app.route('/')
 def index():
+    """
+    Renderiza la página principal.
+    """
     return render_template('index.html')
 
 @app.route('/video_feed')
 def video_feed():
+    """
+    Proporciona el feed de video en tiempo real.
+    """
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/placa_info')
 def placa_info():
+    """
+    Proporciona la información de la última placa detectada.
+    """
     try:
         with open('static/placa_info.json') as f:
             data = json.load(f)
