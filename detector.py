@@ -1,14 +1,13 @@
 import numpy as np
 import cv2
+import json
+import numpy as np
+import cv2
 import easyocr
 import re
 from datetime import datetime
-import json
-from flask import Flask, render_template, Response, jsonify
+from utils import validar_formato_placa, verificar_pico_y_placa
 
-app = Flask(__name__)
-
-# Configuración optimizada para placas colombianas
 reader = easyocr.Reader(['es'], gpu=False)
 
 class PlacaDetector:
@@ -102,107 +101,17 @@ class PlacaDetector:
                         }
         
         return None
-
-def validar_formato_placa(placa_texto):
-    """
-    Valida si el texto corresponde a un formato válido de placa colombiana.
-    Retorna un diccionario con el resultado de la validación y el tipo de vehículo.
-    """
-    # Limpiamos la placa de espacios al inicio y al final, y la convertimos a mayúsculas
-    placa_texto = placa_texto.strip().upper()
     
-    # Patrones de formato para cada tipo de vehículo con espacio incluido
-    patrones = {
-        'particular': r'^[A-Z]{3} \d{3}$',  # AAA 000
-        'publico': r'^[A-Z]{2} \d{4}$',     # AA 0000
-        'moto': r'^[A-Z]{3} \d{2}[A-Z]?$'   # AAA 00 o AAA 00A
-    }
-    
-    for tipo, patron in patrones.items():
-        if re.match(patron, placa_texto):
-            return {
-                'es_valida': True,
-                'tipo_vehiculo': tipo,
-                'placa': placa_texto,
-                'mensaje': f"Placa válida de {tipo}"
-            }
-    
-    return {
-        'es_valida': False,
-        'tipo_vehiculo': None,
-        'placa': placa_texto,
-        'mensaje': f"Formato de placa '{placa_texto}' no válido"
-    }
-
-def verificar_pico_y_placa(placa_texto, confidence):
-    """
-    Verifica si un vehículo tiene pico y placa basado en su número de placa.
-    Incluye el nivel de confianza en el resultado.
-    """
-    # Primero validamos el formato de la placa
-    validacion = validar_formato_placa(placa_texto)
-    
-    if not validacion['es_valida']:
-        return {
-            'message': validacion['mensaje'],
-            'status': 'error',
-            'confidence': confidence
-        }
-    
-    # Obtenemos el último dígito de la placa
-    digitos = ''.join(filter(str.isdigit, placa_texto))
-    if not digitos:
-        return {
-            'message': f"No se encontraron dígitos en la placa '{placa_texto}'.",
-            'status': 'error',
-            'confidence': confidence
-        }
-
-    ultimo_digito = int(digitos[-1])
-    dia_semana = datetime.today().weekday()
-    
-    # Lógica de pico y placa según el día de la semana y el último dígito
-    restriccion = {
-        0: [7, 8],  # Lunes
-        1: [9, 0],  # Martes
-        2: [1, 2],  # Miércoles
-        3: [3, 4],  # Jueves
-        4: [5, 6]   # Viernes
-    }
-    
-    if dia_semana in restriccion and ultimo_digito in restriccion[dia_semana]:
-        return {
-            'message': f"La placa '{placa_texto}' ({validacion['tipo_vehiculo']}) tiene pico y placa hoy.",
-            'status': 'warning',
-            'confidence': confidence
-        }
-    else:
-        return {
-            'message': f"La placa '{placa_texto}' ({validacion['tipo_vehiculo']}) no tiene pico y placa hoy.",
-            'status': 'success',
-            'confidence': confidence
-        }
-
 def gen_frames():
-    """
-    Genera frames de video desde la cámara y detecta placas en tiempo real.
-    """
     cap = cv2.VideoCapture(0)
     detector = PlacaDetector()
-    
     while True:
         success, frame = cap.read()
         if not success:
             break
-            
-        # Detectar placa
         result = detector.detect_plate(frame)
-        
         if result:
-            # Validar y verificar pico y placa
             pico_y_placa_info = verificar_pico_y_placa(result['text'], result['confidence'])
-            
-            # Guardar información
             with open('static/placa_info.json', 'w') as f:
                 json.dump({
                     'placa_texto': result['text'],
@@ -210,41 +119,7 @@ def gen_frames():
                     'verificacion': pico_y_placa_info['message'],
                     'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 }, f)
-        
-        # Codificar frame
         ret, buffer = cv2.imencode('.jpg', frame)
         frame = buffer.tobytes()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
-# Rutas Flask
-
-
-@app.route('/')
-def index():
-    """
-    Renderiza la página principal.
-    """
-    return render_template('index.html')
-
-@app.route('/video_feed')
-def video_feed():
-    """
-    Proporciona el feed de video en tiempo real.
-    """
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/placa_info')
-def placa_info():
-    """
-    Proporciona la información de la última placa detectada.
-    """
-    try:
-        with open('static/placa_info.json') as f:
-            data = json.load(f)
-        return jsonify(data)
-    except FileNotFoundError:
-        return jsonify({'error': 'No se ha detectado ninguna placa'})
-
-if __name__ == '__main__':
-    app.run(debug=True)

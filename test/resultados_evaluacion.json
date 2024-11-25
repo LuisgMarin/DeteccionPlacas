@@ -1,0 +1,14 @@
+{
+    "metricas_finales": {
+        "precision": 0,
+        "recall": 0,
+        "f1_score": 0,
+        "tiempo_promedio": 3.0866575781876504,
+        "confianza_promedio": 0,
+        "tasa_deteccion": 0.0
+    },
+    "historial_detecciones": [],
+    "timestamp": "2024-11-25T02:38:33.042015",
+    "total_frames": 1247,
+    "total_detecciones": 0
+}
