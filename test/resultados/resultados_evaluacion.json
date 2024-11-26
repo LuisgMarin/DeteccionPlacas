@@ -1,123 +1,207 @@
 {
     "metricas_finales": {
-        "precision": 0.0,
-        "recall": 0,
-        "f1_score": 0,
-        "tiempo_promedio": 200.58507407407407,
-        "confianza_promedio": 0.879131318648972,
+        "precision": 0.8888888888888888,
+        "recall": 0.6666666666666666,
+        "f1_score": 0.761904761904762,
+        "tiempo_promedio": 189.23325925925928,
+        "confianza_promedio": 0.8791313186489721,
         "tasa_deteccion": 0.6666666666666666
     },
-    "historial_detecciones": [
+    "resultados_detallados": [
         {
-            "placa": "NCK 182",
-            "confianza": 0.7175386891163524,
-            "tiempo_deteccion": 311.439,
-            "timestamp": "2024-11-25T02:58:03.251569"
+            "imagen": "1.jpg",
+            "placa_detectada": "NCK 182",
+            "placa_esperada": "NCK 182",
+            "coincide": true,
+            "confianza": "71.75%",
+            "tiempo_ms": "274.9ms"
         },
         {
-            "placa": "PLO 388",
-            "confianza": 0.9960977252846468,
-            "tiempo_deteccion": 250.54900000000004,
-            "timestamp": "2024-11-25T02:58:04.012812"
+            "imagen": "10.jpg",
+            "placa_detectada": "AUR 242",
+            "placa_esperada": "AUR 242",
+            "coincide": true,
+            "confianza": "64.89%",
+            "tiempo_ms": "144.6ms"
         },
         {
-            "placa": "FDP 761",
-            "confianza": 0.9694361956633736,
-            "tiempo_deteccion": 130.523,
-            "timestamp": "2024-11-25T02:58:04.660180"
+            "imagen": "14.jpg",
+            "placa_detectada": "IBR 014",
+            "placa_esperada": "IBR 014",
+            "coincide": true,
+            "confianza": "99.86%",
+            "tiempo_ms": "437.5ms"
         },
         {
-            "placa": "GNK 495",
-            "confianza": 0.9700111645438262,
-            "tiempo_deteccion": 230.02800000000002,
-            "timestamp": "2024-11-25T02:58:05.402438"
+            "imagen": "15.jpg",
+            "placa_detectada": "RCD 549",
+            "placa_esperada": "RCD 549",
+            "coincide": true,
+            "confianza": "98.95%",
+            "tiempo_ms": "496.5ms"
         },
         {
-            "placa": "LAC 290",
-            "confianza": 0.7756723211266395,
-            "tiempo_deteccion": 381.048,
-            "timestamp": "2024-11-25T02:58:06.294739"
+            "imagen": "16.jpg",
+            "placa_detectada": "CIZ 826",
+            "placa_esperada": "CIZ 826",
+            "coincide": true,
+            "confianza": "95.66%",
+            "tiempo_ms": "407.7ms"
         },
         {
-            "placa": "RII 282",
-            "confianza": 0.9991953158982336,
-            "tiempo_deteccion": 354.635,
-            "timestamp": "2024-11-25T02:58:07.160888"
+            "imagen": "17.jpg",
+            "placa_detectada": "CBR 070",
+            "placa_esperada": "CBR 070",
+            "coincide": true,
+            "confianza": "96.94%",
+            "tiempo_ms": "150.8ms"
         },
         {
-            "placa": "WNA 756",
-            "confianza": 0.8977569008708165,
-            "tiempo_deteccion": 238.57,
-            "timestamp": "2024-11-25T02:58:08.414988"
+            "imagen": "18.jpg",
+            "placa_detectada": "KOO 042",
+            "placa_esperada": "KDO 042",
+            "coincide": false,
+            "confianza": "90.24%",
+            "tiempo_ms": "86.7ms"
         },
         {
-            "placa": "FRA 098",
-            "confianza": 0.8835064902419446,
-            "tiempo_deteccion": 315.49399999999997,
-            "timestamp": "2024-11-25T02:58:09.244454"
+            "imagen": "19.jpg",
+            "placa_detectada": "RKI 328",
+            "placa_esperada": "RKW 326",
+            "coincide": false,
+            "confianza": "46.20%",
+            "tiempo_ms": "90.9ms"
         },
         {
-            "placa": "AUR 242",
-            "confianza": 0.6488610869116719,
-            "tiempo_deteccion": 148.688,
-            "timestamp": "2024-11-25T02:58:09.901490"
+            "imagen": "2.jpg",
+            "placa_detectada": "PLO 388",
+            "placa_esperada": "PLO 388",
+            "coincide": true,
+            "confianza": "99.61%",
+            "tiempo_ms": "162.4ms"
         },
         {
-            "placa": "IBR 014",
-            "confianza": 0.9985548423311277,
-            "tiempo_deteccion": 421.706,
-            "timestamp": "2024-11-25T02:58:12.349433"
+            "imagen": "20.jpg",
+            "placa_detectada": "RJV 247",
+            "placa_esperada": "RJV 247",
+            "coincide": true,
+            "confianza": "99.45%",
+            "tiempo_ms": "106.5ms"
         },
         {
-            "placa": "RCD 549",
-            "confianza": 0.9895131095717584,
-            "tiempo_deteccion": 508.607,
-            "timestamp": "2024-11-25T02:58:13.368377"
+            "imagen": "21.jpg",
+            "placa_detectada": "DFV 275",
+            "placa_esperada": "DFV 275",
+            "coincide": true,
+            "confianza": "69.54%",
+            "tiempo_ms": "90.1ms"
         },
         {
-            "placa": "CIZ 826",
-            "confianza": 0.9566054575224731,
-            "tiempo_deteccion": 426.995,
-            "timestamp": "2024-11-25T02:58:14.307708"
+            "imagen": "24.jpg",
+            "placa_detectada": "GXL 041",
+            "placa_esperada": "GXL 041",
+            "coincide": true,
+            "confianza": "99.81%",
+            "tiempo_ms": "144.1ms"
         },
         {
-            "placa": "CBR 070",
-            "confianza": 0.9693613602757127,
-            "tiempo_deteccion": 137.519,
-            "timestamp": "2024-11-25T02:58:14.957928"
+            "imagen": "3.jpg",
+            "placa_detectada": "FDP 761",
+            "placa_esperada": "FDP 761",
+            "coincide": true,
+            "confianza": "96.94%",
+            "tiempo_ms": "116.2ms"
         },
         {
-            "placa": "KOO 042",
-            "confianza": 0.9023579142148022,
-            "tiempo_deteccion": 82.516,
-            "timestamp": "2024-11-25T02:58:15.553016"
+            "imagen": "4.jpg",
+            "placa_detectada": "GNK 495",
+            "placa_esperada": "GNK 495",
+            "coincide": true,
+            "confianza": "97.00%",
+            "tiempo_ms": "198.5ms"
         },
         {
-            "placa": "RKI 328",
-            "confianza": 0.4619668843776755,
-            "tiempo_deteccion": 90.512,
-            "timestamp": "2024-11-25T02:58:16.153483"
+            "imagen": "5.jpg",
+            "placa_detectada": "LAC 290",
+            "placa_esperada": "LAC 290",
+            "coincide": true,
+            "confianza": "77.57%",
+            "tiempo_ms": "304.9ms"
         },
         {
-            "placa": "RJV 247",
-            "confianza": 0.9944838714078985,
-            "tiempo_deteccion": 101.515,
-            "timestamp": "2024-11-25T02:58:16.763068"
+            "imagen": "6.jpg",
+            "placa_detectada": "RII 282",
+            "placa_esperada": "RII 282",
+            "coincide": true,
+            "confianza": "99.92%",
+            "tiempo_ms": "434.5ms"
         },
         {
-            "placa": "DFV 275",
-            "confianza": 0.695370770940493,
-            "tiempo_deteccion": 90.077,
-            "timestamp": "2024-11-25T02:58:17.365290"
+            "imagen": "8.jpg",
+            "placa_detectada": "WNA 756",
+            "placa_esperada": "WNA 756",
+            "coincide": true,
+            "confianza": "89.78%",
+            "tiempo_ms": "193.5ms"
         },
         {
-            "placa": "GXL 041",
-            "confianza": 0.9980736353820511,
-            "tiempo_deteccion": 186.065,
-            "timestamp": "2024-11-25T02:58:20.072820"
+            "imagen": "9.jpg",
+            "placa_detectada": "FRA 098",
+            "placa_esperada": "FRA 098",
+            "coincide": true,
+            "confianza": "88.35%",
+            "tiempo_ms": "233.5ms"
         }
     ],
-    "timestamp": "2024-11-25T02:58:21.082493",
-    "total_frames": 27,
-    "total_detecciones": 18
+    "imagenes_no_detectadas": [
+        {
+            "imagen": "11.jpg",
+            "placa_esperada": "RZK 115",
+            "detectada": false
+        },
+        {
+            "imagen": "12.jpg",
+            "placa_esperada": "JWF 579",
+            "detectada": false
+        },
+        {
+            "imagen": "13.jpg",
+            "placa_esperada": "JAW 589",
+            "detectada": false
+        },
+        {
+            "imagen": "22.jpg",
+            "placa_esperada": "GGU 267",
+            "detectada": false
+        },
+        {
+            "imagen": "23.jpg",
+            "placa_esperada": "BTN 068",
+            "detectada": false
+        },
+        {
+            "imagen": "25.jpg",
+            "placa_esperada": "NAG 598",
+            "detectada": false
+        },
+        {
+            "imagen": "26.jpg",
+            "placa_esperada": "FBU 803",
+            "detectada": false
+        },
+        {
+            "imagen": "27.jpeg",
+            "placa_esperada": null,
+            "detectada": false
+        },
+        {
+            "imagen": "7.jpg",
+            "placa_esperada": "MRQ 523",
+            "detectada": false
+        }
+    ],
+    "timestamp": "2024-11-25T12:30:15.724640",
+    "total_imagenes": 27,
+    "total_detecciones": 18,
+    "total_no_detectadas": 9
 }
